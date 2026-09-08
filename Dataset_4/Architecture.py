@@ -44,7 +44,7 @@ warnings.filterwarnings("ignore")
 # =============================================================================
 
 # --- Paths ---
-DATASET_DIR = "C:/Users/Malek Adouani/Desktop/SF_GAN_U/Dataset_Pediatric/"
+DATASET_DIR = "C:/Users/Malek Adouani/Desktop/SF_GAN_U/Dataset_4/"
 MODEL_DIR   = os.path.join(DATASET_DIR, "models")
 os.makedirs(MODEL_DIR, exist_ok=True)
 
@@ -66,8 +66,8 @@ LATENT_DIM    = 14
 MAX_GRAD_NORM = 1.1
 
 # --- Training epochs ---
-CVAE_EPOCHS  = 30
-WGAN_EPOCHS  = 30
+CVAE_EPOCHS  = 100
+WGAN_EPOCHS  = 500
 
 # --- Loss regularisation weights ---
 LAMBDA_L1   = 0.0001
@@ -1583,7 +1583,3 @@ plt.tight_layout()
 abl_dpd_path = os.path.join(DATASET_DIR, "ablation_dpd_bar.png")
 plt.savefig(abl_dpd_path, dpi=150, bbox_inches="tight")
 plt.show()
-print(f"\nAblation DPD bar chart saved  : {abl_dpd_path}")
-print(f"Ablation DPD summary saved    : {os.path.join(DATASET_DIR, 'ablation_dpd_comparison.csv')}")
-print(f"DPD rho sweep summary saved   : {os.path.join(DATASET_DIR, 'fairness_dpd_rho_sweep.csv')}")
-print(f"AUROC+AUPRC summary saved     : {os.path.join(DATASET_DIR, 'utility_auroc_auprc_rho_sweep.csv')}") 
