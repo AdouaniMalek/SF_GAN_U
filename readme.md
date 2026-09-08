@@ -29,17 +29,6 @@ The reconstruction objective treats the input variables according to their type:
 - Binary cross-entropy is used for binary variables.
 - The Kullback–Leibler divergence regularizes the latent distribution.
 
-The implemented CVAE objective is:
-
-\[
-\mathcal{L}_{\mathrm{CVAE}}
-=
-\mathcal{L}_{\mathrm{BCE}}
-+
-\mathcal{L}_{\mathrm{MSE}}
-+
-\mathcal{L}_{\mathrm{KL}}.
-\]
 
 Class weights are applied when the proportion of the majority class exceeds `0.60`.
 
@@ -53,30 +42,9 @@ The reconstructed private representations produced by the CVAE are passed to a W
 - A Wasserstein critic that distinguishes reconstructed observations from generated observations.
 - A fairness critic that attempts to recover the sensitive attribute from generated samples.
 
-The WGAN critic is trained using the Wasserstein loss and a gradient penalty:
 
-\[
-\mathcal{L}_{D}
-=
-\mathbb{E}[D(\tilde{x})]
--
-\mathbb{E}[D(x)]
-+
-\lambda_{\mathrm{GP}}\mathcal{L}_{\mathrm{GP}}.
-\]
 
-The fairness critic minimizes a cross-entropy classification loss. Conversely, the generator is encouraged to make the sensitive attribute difficult to predict:
-
-\[
-\mathcal{L}_{G}
-=
--\mathbb{E}[D(\tilde{x})]
--
-\lambda_{\mathrm{fair}}
-\mathcal{L}_{\mathrm{fair}}.
-\]
-
-This adversarial objective encourages the generation of realistic observations while reducing dependence between generated outcomes and the selected sensitive attribute.
+The fairness critic minimizes a cross-entropy classification loss. Conversely, the generator is encouraged to make the sensitive attribute difficult to predict. This adversarial objective encourages the generation of realistic observations while reducing dependence between generated outcomes and the selected sensitive attribute.
 
 ![SF-GAN architecture](Figures/architecture_SF-GAN.png)
 
@@ -403,8 +371,6 @@ rho = compute_zcdp(
 )
 ```
 
-The corresponding \((\varepsilon,\delta)\)-DP values are obtained using:
-
 ```python
 epsilon, delta, _ = get_privacy_spent(
     rho,
@@ -428,30 +394,6 @@ epsilon, delta, _ = get_privacy_spent(
 
 A standard normal noise vector having the same dimension as the complete input feature vector is supplied to the generator.
 
-### Evaluation
-
-| Evaluation setting | Value |
-|---|---:|
-| Independent evaluation runs | `30` |
-| Utility setting | Train on Synthetic, Test on Real |
-| Real-data test proportion | `0.25` |
-| Label threshold | `0.5` |
-| Fairness metric | Demographic Parity Difference |
-| Utility and fairness sweep | `[5, 10, 15, 20, 30, 50]` |
-| Utility metrics | AUROC and AUPRC |
-| Utility classifiers | Logistic Regression, Random Forest and XGBoost |
-
-The downstream classifiers use the following configurations:
-
-| Classifier | Configuration |
-|---|---|
-| Logistic Regression | `max_iter=1000`, `solver="lbfgs"`, `class_weight="balanced"` |
-| Random Forest | `n_estimators=100`, `max_depth=6`, `class_weight="balanced"` |
-| XGBoost | `n_estimators=100`, `max_depth=4`, `learning_rate=0.1`, `eval_metric="logloss"` |
-
-Continuous predictors are standardized using `StandardScaler` for the downstream utility evaluation.
-
----
 
 ## Ablation Study
 
@@ -466,51 +408,6 @@ The implementation evaluates three component-removal variants:
 
 These variants are used to study the contribution of the privacy mechanism, the CVAE representation, and the adversarial fairness component.
 
----
-
-## Evaluation Outputs
-
-### Utility
-
-Synthetic-data utility is evaluated in the **Train on Synthetic, Test on Real (TSTR)** setting using:
-
-- Logistic Regression
-- Random Forest
-- XGBoost
-
-The reported metrics are:
-
-- Area Under the Receiver Operating Characteristic Curve (**AUROC**)
-- Area Under the Precision–Recall Curve (**AUPRC**)
-
-Results are averaged over 30 independent runs.
-
-### Fairness
-
-Fairness is evaluated using the maximum pairwise **Demographic Parity Difference (DPD)**:
-
-\[
-\mathrm{DPD}
-=
-\max_{i,j}
-\left|
-P(\hat{Y}=1\mid A=i)
--
-P(\hat{Y}=1\mid A=j)
-\right|.
-\]
-
-Lower DPD values indicate smaller differences in positive prediction rates across sensitive groups.
-
-### Privacy
-
-The implementation reports the zCDP parameter \(\rho\) and its conversion to an \((\varepsilon,\delta)\)-DP representation, with:
-
-\[
-\delta = 10^{-5}.
-\]
-
----
 
 ## Generated Files
 
