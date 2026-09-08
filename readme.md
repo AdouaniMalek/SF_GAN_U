@@ -388,8 +388,8 @@ epsilon, delta, _ = get_privacy_spent(
 | Wasserstein critic L1 coefficient | `LAMBDA_L1` | `0.0001` |
 | Fairness critic L1 coefficient | `LAMBDA_L1_F` | `0.0001` |
 | Fairness-loss coefficient | `LAMBDA_FAIR` | `0.5` |
-| Sensitive attribute | — | `Age` |
-| Number of sensitive groups | `AGE_NUM_CLASSES` | `3` |
+| Sensitive attribute | — | `Age`, `Gender`, `Ethnicity` |
+| Number of sensitive groups | `AGE_NUM_CLASSES`, `Gender Group`, `Ethnicity Group` | `5` |
 | Progress-reporting interval | `SAMPLE_INTERVAL` | `1` |
 
 A standard normal noise vector having the same dimension as the complete input feature vector is supplied to the generator.
