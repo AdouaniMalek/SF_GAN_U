@@ -53,7 +53,7 @@ The fairness critic minimizes a cross-entropy classification loss. Conversely, t
 ## Repository Structure
 
 ```text
-SF_GAN_U_code/
+SF_GAN_code/
 ├── Data/
 │   └── Readme.md
 │
@@ -124,13 +124,13 @@ Please consult the original dataset sources for their respective licenses, terms
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/AdouaniMalek/SF_GAN_U.git
-cd SF_GAN_U
+git clone https://github.com/AdouaniMalek/SF_GAN.git
+cd SF_GAN
 ```
 
 
 ```bash
-cd SF_GAN_U_code
+cd SF_GAN_code
 ```
 
 ### 2. Create a Virtual Environment
@@ -181,7 +181,7 @@ Before running an experiment, open the corresponding `Architecture.py` file and 
 The current Dataset 1 implementation contains an absolute local path:
 
 ```python
-DATASET_DIR = "path_to_/SF_GAN_U/Dataset_1/"
+DATASET_DIR = "path_to_/SF_GAN/Dataset_1/"
 ```
 
 For portability across operating systems and computers, replace it with:
