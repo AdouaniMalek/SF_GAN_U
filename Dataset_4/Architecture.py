@@ -44,7 +44,7 @@ warnings.filterwarnings("ignore")
 # =============================================================================
 
 # --- Paths ---
-DATASET_DIR = "C:/Users/Malek Adouani/Desktop/SF_GAN_U/Dataset_4/"
+DATASET_DIR = "C:/Users/Malek Adouani/Desktop/SF_GAN/Dataset_4/"
 MODEL_DIR   = os.path.join(DATASET_DIR, "models")
 os.makedirs(MODEL_DIR, exist_ok=True)
 
