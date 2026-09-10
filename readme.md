@@ -4,6 +4,8 @@
 
 SF-GAN is a hybrid generative framework designed to generate realistic synthetic tabular healthcare data while jointly considering **data utility**, **privacy**, and **fairness**.
 
+![SF-GAN architecture](Figures/architecture_SF-GAN.png)
+
 The framework integrates:
 
 - A **Conditional Variational Autoencoder (CVAE)** for learning class-conditional representations of mixed-type tabular data.
@@ -45,8 +47,6 @@ The reconstructed private representations produced by the CVAE are passed to a W
 
 
 The fairness critic minimizes a cross-entropy classification loss. Conversely, the generator is encouraged to make the sensitive attribute difficult to predict. This adversarial objective encourages the generation of realistic observations while reducing dependence between generated outcomes and the selected sensitive attribute.
-
-![SF-GAN architecture](Figures/architecture_SF-GAN.png)
 
 ---
 
